@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Godwin Yung" />
+
+<meta name="date" content="2019-12-15" />
+
+<title>Basic functionalities</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Basic functionalities</h1>
+<h4 class="author">Godwin Yung</h4>
+<h4 class="date">2019-12-15</h4>
+
+
+
+<p>This vignette walks through the basic functions in npsurvSS. By the end, users should be able to:</p>
+<ul>
+<li>create an object that captures the distributional assumptions for a treatment arm</li>
+<li>visualize the distributional assumptions</li>
+<li>calculate power and sample size for a two-arm study</li>
+<li>approximate an event-driven study by a time-driven study</li>
+<li>simulate a two-arm study</li>
+</ul>
+<div id="creating-objects-of-class-arm" class="section level2">
+<h2>Creating objects of class “arm”</h2>
+<p>The cornerstone of npsurvSS lies in objects of class “arm”. These objects are lists that capture for a treatment arm assumptions regarding its sample size, accrual, survival, censoring, and duration of follow-up. Once created, they serve as inputs for other functions, including functions for power/sample size calculation and trial simulation.</p>
+<p>The following code creates two arms, an <code>active</code> arm and a <code>control</code> arm. Both arms will accrue 120 patients uniformly over 6 months and follow them for an additional 12 months. Patients will be subjected to loss of follow-up at an exponential rate of 0.00578. <code>active</code> and <code>control</code> patients will experience event at exponential rates of 0.0462 and 0.0578, respectively. The hazard ratio between the two arms is therefore approximately 0.8.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(npsurvSS)</a>
+<a class="sourceLine" id="cb1-2" title="2">active &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb1-3" title="3">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb1-4" title="4">                     <span class="dt">surv_scale=</span><span class="fl">0.0462</span>, </a>
+<a class="sourceLine" id="cb1-5" title="5">                     <span class="dt">loss_scale=</span><span class="fl">0.00578</span>, </a>
+<a class="sourceLine" id="cb1-6" title="6">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7">control &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb1-8" title="8">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb1-9" title="9">                     <span class="dt">surv_scale=</span><span class="fl">0.0578</span>, </a>
+<a class="sourceLine" id="cb1-10" title="10">                     <span class="dt">loss_scale=</span><span class="fl">0.00578</span>, </a>
+<a class="sourceLine" id="cb1-11" title="11">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a></code></pre></div>
+<p>In practice, investigators seldom consider exponential distributions on the hazard rate scale. Instead, they consider the median survival or survival probability at some milestone <em>t</em>. We have defined additional functions to facilitate this practice. <code>per2haz</code> is a simple code that can convert an exponential survival percentile to the hazard rate and vice versa.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">active &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb2-2" title="2">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb2-3" title="3">                     <span class="dt">surv_scale=</span><span class="kw">per2haz</span>(<span class="dv">15</span>), <span class="co"># corresponds to 15 month median</span></a>
+<a class="sourceLine" id="cb2-4" title="4">                     <span class="dt">loss_scale=</span><span class="kw">per2haz</span>(<span class="dv">120</span>), <span class="co"># corresponds to 120 month median</span></a>
+<a class="sourceLine" id="cb2-5" title="5">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6">control &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb2-7" title="7">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb2-8" title="8">                     <span class="dt">surv_scale=</span><span class="kw">per2haz</span>(<span class="dv">12</span>), <span class="co"># corresponds to 12 month median</span></a>
+<a class="sourceLine" id="cb2-9" title="9">                     <span class="dt">loss_scale=</span><span class="kw">per2haz</span>(<span class="dv">120</span>), </a>
+<a class="sourceLine" id="cb2-10" title="10">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="kw">per2haz</span>(<span class="dv">15</span>) <span class="co"># convert median survival to hazard rate</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; [1] 0.04620981</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="kw">per2haz</span>(<span class="fl">0.0462</span>) <span class="co"># convert hazard rate to median survival</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; [1] 15.00319</span></a></code></pre></div>
+<p>Alternatively, <code>create_arm_lachin</code> allows investigators to specify exponential survival and censoring distributions by providing median survivals or milestone survivals.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">active &lt;-<span class="st"> </span><span class="kw">create_arm_lachin</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb3-2" title="2">                            <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb3-3" title="3">                            <span class="dt">surv_median=</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb3-4" title="4">                            <span class="dt">loss_milestone=</span><span class="kw">c</span>(<span class="dv">120</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 120 month median</span></a>
+<a class="sourceLine" id="cb3-5" title="5">                            <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb3-6" title="6">control &lt;-<span class="st"> </span><span class="kw">create_arm_lachin</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb3-7" title="7">                             <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
+<a class="sourceLine" id="cb3-8" title="8">                             <span class="dt">surv_milestone=</span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 12 month median</span></a>
+<a class="sourceLine" id="cb3-9" title="9">                             <span class="dt">loss_median=</span><span class="dv">120</span>, </a>
+<a class="sourceLine" id="cb3-10" title="10">                             <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">class</span>(active)</a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; [1] &quot;list&quot;   &quot;lachin&quot; &quot;arm&quot;</span></a></code></pre></div>
+<p>Note that objects created by <code>create_arm_lachin</code> belong to class “lachin” and “arm”. “lachin” is a subclass of “arm”. It is named after the class of distributions considered by Lachin (1986), which covers uniform/truncated-exponential accrual, exponential survival, and exponential censoring. Check out the R Documentation <code>?create_arm</code> for examples of “arm” objects with more sophisticated assumptions, such as piecewise-uniform accrual, piecewise-exponential/Weibull survival, and Weibull censoring. While objects created by <code>create_arm_lachin</code> are always of class “lachin” and “arm”, objects created by <code>create_arm</code> are always of class “arm”, but not necessarily of class “lachin”.</p>
+</div>
+<div id="visualizing-distributional-assumptions" class="section level2">
+<h2>Visualizing distributional assumptions</h2>
+<p>Having created an “arm” object, visualizing its assumptions is easy. For example, the following code plots the accrual cumulative distribution function (CDF):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">plot</span>(x, <span class="kw">paccr</span>(<span class="dt">q=</span>x, <span class="dt">arm=</span>control), </a>
+<a class="sourceLine" id="cb4-3" title="3">     <span class="dt">xlab=</span><span class="st">&quot;Time from first patient in (month)&quot;</span>, </a>
+<a class="sourceLine" id="cb4-4" title="4">     <span class="dt">ylab=</span><span class="st">&quot;Accrual CDF&quot;</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAbFBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6Ojo6kJA6kNtmAABmADpmkJBmtrZmtv+QOgCQOmaQZgCQkGaQtpCQ2/+2ZgC2Zma225C2/7a2///bkDrb/7bb////tmb/25D//7b//9v////lyCoyAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAJ8ElEQVR4nO2dCXfjJhSFlTTJtLVnaneJ2hlN5OX//8cK0GoBVyBA2Ln3nGbSGHjoE8sDnuTiSllVbF2B3EVAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAQUGFBxN9oKUNji4omAgAgIKDEg9669nYrRz8XJA1vPWN0tJCC9itkvi3MErkCeKjS/Lc4SuAYZajxCEtBM0wmEgG50O786AjrvD4HqEaaY4JrVywfQ5bgLX5E8NK8WAY2lqRUBDdK695EAlUXxejk2KwrTkJUfIMPqJw6g6uWjYfQq0huSZgfIVKEogGSC+un9qlCtsptG5sWzM6BhPf78w5RWYqzl57UhVV6ALLWJ4ijeWQuy7r3E8aT7McjYGzMCZK+KOyDVywwNo9MdzWKgJs6ASnXNVbHOF8oFENzadAWkRpZGp7dVq7I8AC3Y+XUEdDm+dn8oX41pR6pynsWWVMJ5mu97lunS7aXktGm/qA7+2x0mD8eluC218B59VkCLm3AkQHKKt3nb2wJy6OFxAPVOQG3yBjYF5GI8ylps5D/nuNRwsh1lqbGgnW0HyHECjbdYVcquBbkadgakXMXTm3WlUXVrsOzGIGe7roDOe9Ukun8N6sYqY6JtAHn4p66Ayu6SjZupge0GlJf77rwWg6NLYLvB5Lm6+TSetK/BxItVd7uB5G3PeQwatjvuqIut2DxwBdTvk93RhtmqvRVnP6j1bO5oy3WdKXdPWi3UF20nhrC7Wist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" /><!-- --></p>
+<p>Likewise, the survival function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">plot</span>(x, <span class="kw">psurv</span>(<span class="dt">q=</span>x, <span class="dt">arm=</span>control, <span class="dt">lower.tail=</span>F), </a>
+<a class="sourceLine" id="cb5-3" title="3">     <span class="dt">xlab=</span><span class="st">&quot;Time from study entry (month)&quot;</span>, </a>
+<a class="sourceLine" id="cb5-4" title="4">     <span class="dt">ylab=</span><span class="st">&quot;Survival function&quot;</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5">     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Just as <code>pbinom</code> in the R package stats is accompanied by functions for the density, quantile, and random generation, <code>paccr</code> is similarly accompanied by <code>daccr</code>, <code>qaccr</code>, and <code>raccr</code>. Distribution functions <code>psurv</code> and <code>ploss</code> are further accompanied by <code>hsurv</code> and <code>hloss</code> for the hazard.</p>
+</div>
+<div id="calculating-power-and-sample-size" class="section level2">
+<h2>Calculating power and sample size</h2>
+<p>Given an <code>active</code> arm and a <code>control</code> arm, calculating power and sample size is also easy. The following code calculates power under the default setting of an unweighted log-rank test with one-sided alpha 0.025:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">power_two_arm</span>(control, active)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; [1] 0.2366524</span></a></code></pre></div>
+<p>To calculate power for other tests:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># unweighted log-rank</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>))</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; [1] 0.2366524</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co"># Gehan-Breslow weighted log-rank</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>))</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; [1] 0.2210357</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co"># difference in 12 month survival</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; [1] 0.2050328</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co"># ratio of 12 month RMST</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; [1] 0.1823979</span></a></code></pre></div>
+<p>Power for multiple tests can be calculated simulateously:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</a>
+<a class="sourceLine" id="cb8-2" title="2">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>),</a>
+<a class="sourceLine" id="cb8-3" title="3">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb8-4" title="4">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb8-5" title="5">))</a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt;   test     power</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 1    1 0.2366524</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 2    2 0.2210357</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; 3    3 0.2050328</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 4    4 0.1823979</span></a></code></pre></div>
+<p>To calculate sample size required to achieve 80% power:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">size_two_arm</span>(control, active, </a>
+<a class="sourceLine" id="cb9-2" title="2">             <span class="dt">test=</span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</a>
+<a class="sourceLine" id="cb9-3" title="3">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>),</a>
+<a class="sourceLine" id="cb9-4" title="4">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>),</a>
+<a class="sourceLine" id="cb9-5" title="5">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb9-6" title="6">             ))</a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt;   test       n0       n1        n       d0       d1        d</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; 1    1 609.7478 609.7478 1219.496 339.3015 292.4822 631.7837</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; 2    2 663.7018 663.7018 1327.404 369.3249 318.3627 687.6876</span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; 3    3 729.6092 729.6092 1459.218 405.9998 349.9770 755.9768</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; 4    4 848.3117 848.3117 1696.623 472.0532 406.9159 878.9692</span></a></code></pre></div>
+<p>Note that <code>size_two_arm</code> returns the required sample size <em>n</em> and expected number of events <em>d</em> (per arm and total). When calculating the required sample size per arm, it considers as input the specified ratio between the two arms (e.g. 120:120) while ignoring their individual values (e.g. 120 and 120). Thus, the following two “arm” objects result in the same sample size calculation for the unweighted log-rank test:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">control_new &lt;-<span class="st"> </span>control</a>
+<a class="sourceLine" id="cb10-2" title="2">active_new  &lt;-<span class="st"> </span>active</a>
+<a class="sourceLine" id="cb10-3" title="3">control_new<span class="op">$</span>size  &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb10-4" title="4">active_new<span class="op">$</span>size   &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="kw">size_two_arm</span>(control_new, active_new)</a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt;  609.7478  609.7478 1219.4956  339.3015  292.4822  631.7837</span></a></code></pre></div>
+<p>Sample size for a trial with 2:1 randomization in favor of the active arm can be calculated like so:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">active_new<span class="op">$</span>size   &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">size_two_arm</span>(control_new, active_new)</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt;  445.9943  891.9886 1337.9830  248.1789  427.8668  676.0457</span></a></code></pre></div>
+</div>
+<div id="event-driven-trials" class="section level2">
+<h2>Event-driven trials</h2>
+<p>By containing the keys <code>follow_time</code> and <code>total_time</code>, “arm” objects intrinsically apply to time-driven trials that end when a fixed period of time has elapsed after the last patient in. However, they can also be used to approximate event-driven trials, trials in which the study ends when a desired number of events has been observed. Specifically, a trial requiring <em>d</em> events can be approximated by a trial of length <em>t</em>, where the expected number of events at <em>t</em> is equal to <em>d</em>. The functions <code>exp_events</code> and <code>exp_duration</code> can be useful for this purpose:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">exp_events</span>(control, active) <span class="co"># expected number of events</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co">#&gt; [1] 124.3367</span></a>
+<a class="sourceLine" id="cb12-3" title="3">tau &lt;-<span class="st"> </span><span class="kw">exp_duration</span>(control, active, <span class="dt">d=</span><span class="dv">150</span>) <span class="co"># study duration for expected number of events to equal d</span></a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">tau</a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; [1] 23.75</span></a></code></pre></div>
+<p>Therefore, under the given assumptions, a trial requiring 150 events can be approximated by a 23.75-month long trial. When updating the trial duration in an “arm” object, it is important to update both the <code>follow_time</code> and <code>total_time</code> to ensure their consistency:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">control_new &lt;-<span class="st"> </span>control</a>
+<a class="sourceLine" id="cb13-2" title="2">control_new<span class="op">$</span>total_time  &lt;-<span class="st"> </span>tau</a>
+<a class="sourceLine" id="cb13-3" title="3">control_new<span class="op">$</span>follow_time &lt;-<span class="st"> </span>tau <span class="op">-</span><span class="st"> </span>control_new<span class="op">$</span>accr_time</a>
+<a class="sourceLine" id="cb13-4" title="4">active_new  &lt;-<span class="st"> </span>active</a>
+<a class="sourceLine" id="cb13-5" title="5">active_new<span class="op">$</span>total_time   &lt;-<span class="st"> </span>tau</a>
+<a class="sourceLine" id="cb13-6" title="6">active_new<span class="op">$</span>follow_time  &lt;-<span class="st"> </span>tau <span class="op">-</span><span class="st"> </span>active_new<span class="op">$</span>accr_time</a>
+<a class="sourceLine" id="cb13-7" title="7"></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="kw">exp_events</span>(control_new, active_new) <span class="co"># check expected number of events</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; [1] 149.975</span></a></code></pre></div>
+</div>
+<div id="simulating-a-trial" class="section level2">
+<h2>Simulating a trial</h2>
+<p>Finally, time-driven and event-driven trials can be simulated using the following code:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">trial1 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">duration=</span><span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">head</span>(trial1, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co">#&gt;     arm   time.accr  time.obs time.total censor reason</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">#&gt; 81    0 0.137422475 0.9393870   1.076810      1  event</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt; 25    0 1.471682324 0.0696626   1.541345      1  event</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; 144   1 0.003143816 1.6624453   1.665589      1  event</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; 107   0 0.454901079 1.2542002   1.709101      1  event</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt; 186   1 1.043860969 1.0382043   2.082065      1  event</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="kw">table</span>(trial1<span class="op">$</span>arm, trial1<span class="op">$</span>reason)</a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt;    </span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt;     administration event followup</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt;   0             52    63        5</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;   1             62    53        5</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="kw">max</span>(trial1<span class="op">$</span>time.total)</a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; [1] 18</span></a>
+<a class="sourceLine" id="cb14-16" title="16"></a>
+<a class="sourceLine" id="cb14-17" title="17">trial2 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">events=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="kw">head</span>(trial2, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt;     arm time.accr  time.obs time.total censor reason</span></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="co">#&gt; 213   1 0.4687554 0.6582531   1.127008      1  event</span></a>
+<a class="sourceLine" id="cb14-21" title="21"><span class="co">#&gt; 40    0 0.4848245 0.6663861   1.151211      1  event</span></a>
+<a class="sourceLine" id="cb14-22" title="22"><span class="co">#&gt; 44    0 0.7151992 0.4879829   1.203182      1  event</span></a>
+<a class="sourceLine" id="cb14-23" title="23"><span class="co">#&gt; 106   0 0.5887742 1.3522716   1.941046      1  event</span></a>
+<a class="sourceLine" id="cb14-24" title="24"><span class="co">#&gt; 9     0 0.7832331 1.3743750   2.157608      1  event</span></a>
+<a class="sourceLine" id="cb14-25" title="25"><span class="kw">sum</span>(trial2<span class="op">$</span>censor)</a>
+<a class="sourceLine" id="cb14-26" title="26"><span class="co">#&gt; [1] 150</span></a></code></pre></div>
+<p>If both <code>duration</code> and <code>events</code> are provided, the study will end whenever one of the criteria is met:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">trial3 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">duration=</span><span class="dv">18</span>, <span class="dt">events=</span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">max</span>(trial3<span class="op">$</span>time.total)</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt; [1] 18</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="kw">sum</span>(trial3<span class="op">$</span>censor)</a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; [1] 128</span></a></code></pre></div>
+<p>Should it be desired, investigators may also simulate complete data (accrual, survival, censoring) for each individual treatment arm. Note that no cutoff (by number of events or time) is applied. Hence, no patients are administratively censored:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">control_sim &lt;-<span class="st"> </span><span class="kw">simulate_arm</span>(control)</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">head</span>(control_sim, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt;   arm time.accr  time.obs time.total censor reason time.surv time.loss</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; 1   1 5.3056575 11.756965  17.062622      1  event 11.756965  234.1555</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; 2   1 2.4190124 24.820609  27.239621      1  event 24.820609  368.0955</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; 3   1 2.5310937  5.937343   8.468437      1  event  5.937343  119.1653</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; 4   1 0.5877304  5.025779   5.613509      1  event  5.025779  383.5989</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt; 5   1 1.0893293 17.136234  18.225563      1  event 17.136234  196.1827</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="kw">table</span>(control_sim<span class="op">$</span>arm, control_sim<span class="op">$</span>reason)</a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt;    </span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt;     event followup</span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt;   1   108       12</span></a></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
