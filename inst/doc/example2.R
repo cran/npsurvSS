@@ -1,15 +1,17 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- message=FALSE, warning=FALSE---------------------------------------
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 library(npsurvSS)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(tibble)
 library(ggplot2)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Active
 arm1 <- create_arm(size=240,
                    accr_time=14,
@@ -30,7 +32,7 @@ arm0 <- create_arm(size=120,
                    loss_shape=2,
                    total_time=25)
 
-## ---- fig.show='hold'----------------------------------------------------
+## ---- fig.show='hold'---------------------------------------------------------
 # Accrual
 tibble(
   x = seq(0, 14, 0.1),
@@ -51,7 +53,7 @@ tibble(
   labs(x = "Time from study entry (months)",
        y = "Loss to follow-up CDF")
 
-## ---- fig.width=5--------------------------------------------------------
+## ---- fig.width=5-------------------------------------------------------------
 # Calculate survival curves
 x.vec     <- seq(0, 25, 0.1)  # vector of unique x-coordinates
 tau1.vec  <- seq(0, 4.5, 1.5) # vector of unique changepoints
@@ -79,7 +81,7 @@ tibble(
        color = "Changepoint",
        lty = "Changepoint")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 tau1.vec <- seq(0, 5.5, 0.5) # vector of changepoints
 table_4a <- data.frame(matrix(0, nrow=length(tau1.vec), ncol=7)) # initialize results table
 for (r in 1:length(tau1.vec)) {
@@ -113,10 +115,10 @@ table_4a <- gather(table_4a, "test", "power", 2:7) %>%
   as_tibble()
 names(table_4a)[1] <- "tau1"
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 table_4a
 
-## ---- fig.width=5--------------------------------------------------------
+## ---- fig.width=5-------------------------------------------------------------
 ggplot(table_4a, aes(x=tau1, y=power)) +
   geom_line(aes(color=test, lty=test)) +
   labs(x = "tau1",

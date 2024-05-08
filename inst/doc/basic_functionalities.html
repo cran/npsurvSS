@@ -1,88 +1,118 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Godwin Yung" />
 
-<meta name="date" content="2019-12-15" />
+<meta name="date" content="2024-05-08" />
 
 <title>Basic functionalities</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {  }
+{ }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -91,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -105,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -118,9 +156,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -289,7 +324,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -304,13 +340,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Basic functionalities</h1>
 <h4 class="author">Godwin Yung</h4>
-<h4 class="date">2019-12-15</h4>
+<h4 class="date">2024-05-08</h4>
 
 
 
-<p>This vignette walks through the basic functions in npsurvSS. By the end, users should be able to:</p>
+<p>This vignette walks through the basic functions in npsurvSS. By the
+end, users should be able to:</p>
 <ul>
-<li>create an object that captures the distributional assumptions for a treatment arm</li>
+<li>create an object that captures the distributional assumptions for a
+treatment arm</li>
 <li>visualize the distributional assumptions</li>
 <li>calculate power and sample size for a two-arm study</li>
 <li>approximate an event-driven study by a time-driven study</li>
@@ -318,190 +356,253 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ul>
 <div id="creating-objects-of-class-arm" class="section level2">
 <h2>Creating objects of class “arm”</h2>
-<p>The cornerstone of npsurvSS lies in objects of class “arm”. These objects are lists that capture for a treatment arm assumptions regarding its sample size, accrual, survival, censoring, and duration of follow-up. Once created, they serve as inputs for other functions, including functions for power/sample size calculation and trial simulation.</p>
-<p>The following code creates two arms, an <code>active</code> arm and a <code>control</code> arm. Both arms will accrue 120 patients uniformly over 6 months and follow them for an additional 12 months. Patients will be subjected to loss of follow-up at an exponential rate of 0.00578. <code>active</code> and <code>control</code> patients will experience event at exponential rates of 0.0462 and 0.0578, respectively. The hazard ratio between the two arms is therefore approximately 0.8.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(npsurvSS)</a>
-<a class="sourceLine" id="cb1-2" title="2">active &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb1-3" title="3">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb1-4" title="4">                     <span class="dt">surv_scale=</span><span class="fl">0.0462</span>, </a>
-<a class="sourceLine" id="cb1-5" title="5">                     <span class="dt">loss_scale=</span><span class="fl">0.00578</span>, </a>
-<a class="sourceLine" id="cb1-6" title="6">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb1-7" title="7">control &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb1-8" title="8">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb1-9" title="9">                     <span class="dt">surv_scale=</span><span class="fl">0.0578</span>, </a>
-<a class="sourceLine" id="cb1-10" title="10">                     <span class="dt">loss_scale=</span><span class="fl">0.00578</span>, </a>
-<a class="sourceLine" id="cb1-11" title="11">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a></code></pre></div>
-<p>In practice, investigators seldom consider exponential distributions on the hazard rate scale. Instead, they consider the median survival or survival probability at some milestone <em>t</em>. We have defined additional functions to facilitate this practice. <code>per2haz</code> is a simple code that can convert an exponential survival percentile to the hazard rate and vice versa.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">active &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb2-2" title="2">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb2-3" title="3">                     <span class="dt">surv_scale=</span><span class="kw">per2haz</span>(<span class="dv">15</span>), <span class="co"># corresponds to 15 month median</span></a>
-<a class="sourceLine" id="cb2-4" title="4">                     <span class="dt">loss_scale=</span><span class="kw">per2haz</span>(<span class="dv">120</span>), <span class="co"># corresponds to 120 month median</span></a>
-<a class="sourceLine" id="cb2-5" title="5">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb2-6" title="6">control &lt;-<span class="st"> </span><span class="kw">create_arm</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb2-7" title="7">                     <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb2-8" title="8">                     <span class="dt">surv_scale=</span><span class="kw">per2haz</span>(<span class="dv">12</span>), <span class="co"># corresponds to 12 month median</span></a>
-<a class="sourceLine" id="cb2-9" title="9">                     <span class="dt">loss_scale=</span><span class="kw">per2haz</span>(<span class="dv">120</span>), </a>
-<a class="sourceLine" id="cb2-10" title="10">                     <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="kw">per2haz</span>(<span class="dv">15</span>) <span class="co"># convert median survival to hazard rate</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; [1] 0.04620981</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="kw">per2haz</span>(<span class="fl">0.0462</span>) <span class="co"># convert hazard rate to median survival</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; [1] 15.00319</span></a></code></pre></div>
-<p>Alternatively, <code>create_arm_lachin</code> allows investigators to specify exponential survival and censoring distributions by providing median survivals or milestone survivals.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">active &lt;-<span class="st"> </span><span class="kw">create_arm_lachin</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb3-2" title="2">                            <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb3-3" title="3">                            <span class="dt">surv_median=</span><span class="dv">15</span>,</a>
-<a class="sourceLine" id="cb3-4" title="4">                            <span class="dt">loss_milestone=</span><span class="kw">c</span>(<span class="dv">120</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 120 month median</span></a>
-<a class="sourceLine" id="cb3-5" title="5">                            <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb3-6" title="6">control &lt;-<span class="st"> </span><span class="kw">create_arm_lachin</span>(<span class="dt">size=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb3-7" title="7">                             <span class="dt">accr_time=</span><span class="dv">6</span>, </a>
-<a class="sourceLine" id="cb3-8" title="8">                             <span class="dt">surv_milestone=</span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 12 month median</span></a>
-<a class="sourceLine" id="cb3-9" title="9">                             <span class="dt">loss_median=</span><span class="dv">120</span>, </a>
-<a class="sourceLine" id="cb3-10" title="10">                             <span class="dt">follow_time=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="kw">class</span>(active)</a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; [1] &quot;list&quot;   &quot;lachin&quot; &quot;arm&quot;</span></a></code></pre></div>
-<p>Note that objects created by <code>create_arm_lachin</code> belong to class “lachin” and “arm”. “lachin” is a subclass of “arm”. It is named after the class of distributions considered by Lachin (1986), which covers uniform/truncated-exponential accrual, exponential survival, and exponential censoring. Check out the R Documentation <code>?create_arm</code> for examples of “arm” objects with more sophisticated assumptions, such as piecewise-uniform accrual, piecewise-exponential/Weibull survival, and Weibull censoring. While objects created by <code>create_arm_lachin</code> are always of class “lachin” and “arm”, objects created by <code>create_arm</code> are always of class “arm”, but not necessarily of class “lachin”.</p>
+<p>The cornerstone of npsurvSS lies in objects of class “arm”. These
+objects are lists that capture for a treatment arm assumptions regarding
+its sample size, accrual, survival, censoring, and duration of
+follow-up. Once created, they serve as inputs for other functions,
+including functions for power/sample size calculation and trial
+simulation.</p>
+<p>The following code creates two arms, an <code>active</code> arm and a
+<code>control</code> arm. Both arms will accrue 120 patients uniformly
+over 6 months and follow them for an additional 12 months. Patients will
+be subjected to loss of follow-up at an exponential rate of 0.00578.
+<code>active</code> and <code>control</code> patients will experience
+event at exponential rates of 0.0462 and 0.0578, respectively. The
+hazard ratio between the two arms is therefore approximately 0.8.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(npsurvSS)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>active <span class="ot">&lt;-</span> <span class="fu">create_arm</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>                     <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>                     <span class="at">surv_scale=</span><span class="fl">0.0462</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                     <span class="at">loss_scale=</span><span class="fl">0.00578</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                     <span class="at">follow_time=</span><span class="dv">12</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">create_arm</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>                     <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>                     <span class="at">surv_scale=</span><span class="fl">0.0578</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>                     <span class="at">loss_scale=</span><span class="fl">0.00578</span>, </span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>                     <span class="at">follow_time=</span><span class="dv">12</span>)</span></code></pre></div>
+<p>In practice, investigators seldom consider exponential distributions
+on the hazard rate scale. Instead, they consider the median survival or
+survival probability at some milestone <em>t</em>. We have defined
+additional functions to facilitate this practice. <code>per2haz</code>
+is a simple code that can convert an exponential survival percentile to
+the hazard rate and vice versa.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>active <span class="ot">&lt;-</span> <span class="fu">create_arm</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                     <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                     <span class="at">surv_scale=</span><span class="fu">per2haz</span>(<span class="dv">15</span>), <span class="co"># corresponds to 15 month median</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>                     <span class="at">loss_scale=</span><span class="fu">per2haz</span>(<span class="dv">120</span>), <span class="co"># corresponds to 120 month median</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>                     <span class="at">follow_time=</span><span class="dv">12</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">create_arm</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>                     <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>                     <span class="at">surv_scale=</span><span class="fu">per2haz</span>(<span class="dv">12</span>), <span class="co"># corresponds to 12 month median</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                     <span class="at">loss_scale=</span><span class="fu">per2haz</span>(<span class="dv">120</span>), </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                     <span class="at">follow_time=</span><span class="dv">12</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="fu">per2haz</span>(<span class="dv">15</span>) <span class="co"># convert median survival to hazard rate</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; [1] 0.04620981</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">per2haz</span>(<span class="fl">0.0462</span>) <span class="co"># convert hazard rate to median survival</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; [1] 15.00319</span></span></code></pre></div>
+<p>Alternatively, <code>create_arm_lachin</code> allows investigators to
+specify exponential survival and censoring distributions by providing
+median survivals or milestone survivals.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>active <span class="ot">&lt;-</span> <span class="fu">create_arm_lachin</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>                            <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                            <span class="at">surv_median=</span><span class="dv">15</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                            <span class="at">loss_milestone=</span><span class="fu">c</span>(<span class="dv">120</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 120 month median</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                            <span class="at">follow_time=</span><span class="dv">12</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">create_arm_lachin</span>(<span class="at">size=</span><span class="dv">120</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                             <span class="at">accr_time=</span><span class="dv">6</span>, </span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                             <span class="at">surv_milestone=</span><span class="fu">c</span>(<span class="dv">12</span>, <span class="fl">0.5</span>), <span class="co"># corresponds to 12 month median</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                             <span class="at">loss_median=</span><span class="dv">120</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>                             <span class="at">follow_time=</span><span class="dv">12</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">class</span>(active)</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; [1] &quot;list&quot;   &quot;lachin&quot; &quot;arm&quot;</span></span></code></pre></div>
+<p>Note that objects created by <code>create_arm_lachin</code> belong to
+class “lachin” and “arm”. “lachin” is a subclass of “arm”. It is named
+after the class of distributions considered by Lachin (1986), which
+covers uniform/truncated-exponential accrual, exponential survival, and
+exponential censoring. Check out the R Documentation
+<code>?create_arm</code> for examples of “arm” objects with more
+sophisticated assumptions, such as piecewise-uniform accrual,
+piecewise-exponential/Weibull survival, and Weibull censoring. While
+objects created by <code>create_arm_lachin</code> are always of class
+“lachin” and “arm”, objects created by <code>create_arm</code> are
+always of class “arm”, but not necessarily of class “lachin”.</p>
 </div>
 <div id="visualizing-distributional-assumptions" class="section level2">
 <h2>Visualizing distributional assumptions</h2>
-<p>Having created an “arm” object, visualizing its assumptions is easy. For example, the following code plots the accrual cumulative distribution function (CDF):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">plot</span>(x, <span class="kw">paccr</span>(<span class="dt">q=</span>x, <span class="dt">arm=</span>control), </a>
-<a class="sourceLine" id="cb4-3" title="3">     <span class="dt">xlab=</span><span class="st">&quot;Time from first patient in (month)&quot;</span>, </a>
-<a class="sourceLine" id="cb4-4" title="4">     <span class="dt">ylab=</span><span class="st">&quot;Accrual CDF&quot;</span>,</a>
-<a class="sourceLine" id="cb4-5" title="5">     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAbFBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6Ojo6kJA6kNtmAABmADpmkJBmtrZmtv+QOgCQOmaQZgCQkGaQtpCQ2/+2ZgC2Zma225C2/7a2///bkDrb/7bb////tmb/25D//7b//9v////lyCoyAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAJ8ElEQVR4nO2dCXfjJhSFlTTJtLVnaneJ2hlN5OX//8cK0GoBVyBA2Ln3nGbSGHjoE8sDnuTiSllVbF2B3EVAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAQUGFBxN9oKUNji4omAgAgIKDEg9669nYrRz8XJA1vPWN0tJCC9itkvi3MErkCeKjS/Lc4SuAYZajxCEtBM0wmEgG50O786AjrvD4HqEaaY4JrVywfQ5bgLX5E8NK8WAY2lqRUBDdK695EAlUXxejk2KwrTkJUfIMPqJw6g6uWjYfQq0huSZgfIVKEogGSC+un9qlCtsptG5sWzM6BhPf78w5RWYqzl57UhVV6ALLWJ4ijeWQuy7r3E8aT7McjYGzMCZK+KOyDVywwNo9MdzWKgJs6ASnXNVbHOF8oFENzadAWkRpZGp7dVq7I8AC3Y+XUEdDm+dn8oX41pR6pynsWWVMJ5mu97lunS7aXktGm/qA7+2x0mD8eluC218B59VkCLm3AkQHKKt3nb2wJy6OFxAPVOQG3yBjYF5GI8ylps5D/nuNRwsh1lqbGgnW0HyHECjbdYVcquBbkadgakXMXTm3WlUXVrsOzGIGe7roDOe9Ukun8N6sYqY6JtAHn4p66Ayu6SjZupge0GlJf77rwWg6NLYLvB5Lm6+TSetK/BxItVd7uB5G3PeQwatjvuqIut2DxwBdTvk93RhtmqvRVnP6j1bO5oy3WdKXdPWi3UF20nhrC7Wist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" /><!-- --></p>
+<p>Having created an “arm” object, visualizing its assumptions is easy.
+For example, the following code plots the accrual cumulative
+distribution function (CDF):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">0.1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">paccr</span>(<span class="at">q=</span>x, <span class="at">arm=</span>control), </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Time from first patient in (month)&quot;</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Accrual CDF&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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0vY+//zzojsy+IW2PHToUMkvg9N9PSWZb9++fdWRRx5ZYhlvvvmm6tOnT4nHOO2MdQDzww8/XD322GOJ65o5c6Z65plnimzbe++9ZX+LFi3Ufvvtlzg2V1/ee+89hXpdf/31qlevXpGI4T158mS1fv16tWzZMlWrVi310ksvZc0G19i/f3/Vo0ePwNFeeOGF6rfffhOeKCyIe7tjxw51zDHHqKlTp6qWLVs6XhPaU+/evVX58uUd96e7EcL72muvVTNmzEj3lECPS+abTmGdOnVSd9xxh7xgmzdvns4pckysBVD16tXVv//978TFfvDBByKA7NusnT179rS+5vT/hg0bpLzu3buLBpTTwlMUtnHjRlWvXj117LHHyhF+sMFDlKuEsqD5WsmP+lt5Wf+hubp1hw477DARUNY5mf5/5JFH1L777qv+9a9/ZZqFr+cl800380GDBqmrrrpKXmzpngPIeZOGDRuGDrTj9YwaNUqfd955sm/FihXadM20EVj6pJNO0pUqVdJt2rTRRpXWb731lm7VqpWuWrWqHjBggDZ92yL5TZkyRZtui95jjz20UUv1nDlziuy3/xg/fryuU6eO1KlBgwb6oosukt3mja2fffZZbd4Uunbt2tqo37J9+fLl+rjjjtN77rmnPvjgg7W5mfqPP/5IZIl98+fP1+YNpU2D1Q0bNtSPP/64/vXXX7V5CPU+++yjTzvtNL1o0aLEOclfOnfurCtXrqzLli2rTZdUP/nkk9rOBsc71c/077XR4IQLeB1//PHadFEke1yL6V7KdYLNww8/nFys/Eb9Z8+erc8991xtNFNtNAs9bdq0Isfieq+++moNXqgj+F166aVyjThw4MCBumLFisII9TeaXLH647iS7hPuf7NmzfTatWv1ySefrCtUqCAsn376aZwqZTVu3Fiux3RVtdHqZHvyH1w/6mC1EVzfiy++KO1m//331/gMGTJE//nnn8mnJn7jeg844AA9ceLExLZM26fR2vTdd9+tjSBLtE/rmqzM3eroxNd0rXTTpk31o48+quvXr6/NcILu0KGD/u6776xs5f/WrVv17rvvrp977rki20v64fy0lnRGhPeVJID69eun0aiQ8BDvvPPO0kCM6qv/85//6CpVqmjTpdNocJdddpkeM2aM3MRrrrkmccVGxdS77LKLNmM6+qmnntJG4mvz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" /><!-- --></p>
 <p>Likewise, the survival function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">plot</span>(x, <span class="kw">psurv</span>(<span class="dt">q=</span>x, <span class="dt">arm=</span>control, <span class="dt">lower.tail=</span>F), </a>
-<a class="sourceLine" id="cb5-3" title="3">     <span class="dt">xlab=</span><span class="st">&quot;Time from study entry (month)&quot;</span>, </a>
-<a class="sourceLine" id="cb5-4" title="4">     <span class="dt">ylab=</span><span class="st">&quot;Survival function&quot;</span>,</a>
-<a class="sourceLine" id="cb5-5" title="5">     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Just as <code>pbinom</code> in the R package stats is accompanied by functions for the density, quantile, and random generation, <code>paccr</code> is similarly accompanied by <code>daccr</code>, <code>qaccr</code>, and <code>raccr</code>. Distribution functions <code>psurv</code> and <code>ploss</code> are further accompanied by <code>hsurv</code> and <code>hloss</code> for the hazard.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="fl">0.1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">psurv</span>(<span class="at">q=</span>x, <span class="at">arm=</span>control, <span class="at">lower.tail=</span>F), </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Time from study entry (month)&quot;</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Survival function&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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9MyYBEiACojPAAmQQGAEqIACQ8+MSYAEqID4DJAACQRGgAooMPTMmARIgAqIzwAJkEBgBKiAAkPPjEmABKiA+AyQAAkERoAKKDD0zJgESIAKiM8ACZBAYASogAJDz4xJgASogPgMkAAJBEaACigw9AUzNtP7qh9//LHgDm7JegI7d+5U69aty9rrWL58OaZx9738Oa+ArrzySmXma0/4GzlypHr33XflmNWrV/sO2S1BPJiVKlVSRx99tKpVq5bb4YHv//vvv9WTTz6pfv/995TLgqmVn3rqqZTTSTWBTz75RH300UepJhP3/BtuuEF9+OGHcfdnaofTvTvssMPU/fffn7AI9957r5owYULCYwqzM9wTmBfmimLO6d69uzr33HMjW2+55RZ1zDHHqBtvvDGyDS89bgyU1aGHHhrZnqmFp59+Wm3cuFHNmTNHValSJVPZFjofPIi9evVSV1xxRaHTCNOJe/fuVWeddZZ69tlnVYMGDXwv2hdffKGWLl0q6fueeJIJFvbeDR06VLVo0UK1b99e7b///knmGv/wnFdAZ555psLPknvuuUcUUKdOnaxNkf94AIOQn3/+WdWoUUM1bNgwiOyTzhPKOpcETYt0NC8sRrfddpsobNTEg5bC3jt8tE866SSprfbp08e/yzDg80qOP/54fckllxS4ZlMF13Xq1NHr16+XfYMHD9Z33nmnNkpJn3zyybps2bL6+uuv1+YG6scee0yfcMIJ2igN/eCDD0altWvXLt2zZ09tmlT6yCOP1G3atNFr166NOsa+0q5dOzmuaNGikv9rr72m7777bj1w4EDdv39/XapUKfmPc4x9SHfr1k2XK1dOzmndurX+9ttvI8l9/PHH+owzztDLli3T55xzji5RooRu3ry5Ns1KvWjRIt24cWNdunRpuQ7rOiMn2xa2b98u+eBYpNGkSRMNPpApU6boypUrwxigTc1Rv/DCC3r27NlS9k2bNtlS0fq0007T5osb2bZmzRptaplShtq1a+t33nlH77vvvto05/Rff/2lmzVrpkeMGBE5Hgu//fabNh8QyTdqh23lmWeekbIccsghkuebb75p26t1o0aN9MyZM+W6K1SooPHr27ev/vPPP/Wvv/6qURZcD+6ZqdXJubH34NZbby1U+UyzS5tmpjYfmUiZCvtsebn/p59+ul61apU2tX5tmla6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" /><!-- --></p>
+<p>Just as <code>pbinom</code> in the R package stats is accompanied by
+functions for the density, quantile, and random generation,
+<code>paccr</code> is similarly accompanied by <code>daccr</code>,
+<code>qaccr</code>, and <code>raccr</code>. Distribution functions
+<code>psurv</code> and <code>ploss</code> are further accompanied by
+<code>hsurv</code> and <code>hloss</code> for the hazard.</p>
 </div>
 <div id="calculating-power-and-sample-size" class="section level2">
 <h2>Calculating power and sample size</h2>
-<p>Given an <code>active</code> arm and a <code>control</code> arm, calculating power and sample size is also easy. The following code calculates power under the default setting of an unweighted log-rank test with one-sided alpha 0.025:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">power_two_arm</span>(control, active)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; [1] 0.2366524</span></a></code></pre></div>
+<p>Given an <code>active</code> arm and a <code>control</code> arm,
+calculating power and sample size is also easy. The following code
+calculates power under the default setting of an unweighted log-rank
+test with one-sided alpha 0.025:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.2366524</span></span></code></pre></div>
 <p>To calculate power for other tests:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># unweighted log-rank</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>))</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; [1] 0.2366524</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># Gehan-Breslow weighted log-rank</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>))</a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; [1] 0.2210357</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co"># difference in 12 month survival</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>))</a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; [1] 0.2050328</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co"># ratio of 12 month RMST</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>))</a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; [1] 0.1823979</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># unweighted log-rank</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active, <span class="at">test=</span><span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.2366524</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Gehan-Breslow weighted log-rank</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active, <span class="at">test=</span><span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="at">weight=</span><span class="st">&quot;n&quot;</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.2210357</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># difference in 12 month survival</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active, <span class="at">test=</span><span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; [1] 0.2050328</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co"># ratio of 12 month RMST</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active, <span class="at">test=</span><span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>))</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [1] 0.1823979</span></span></code></pre></div>
 <p>Power for multiple tests can be calculated simulateously:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">power_two_arm</span>(control, active, <span class="dt">test=</span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</a>
-<a class="sourceLine" id="cb8-2" title="2">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>),</a>
-<a class="sourceLine" id="cb8-3" title="3">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>),</a>
-<a class="sourceLine" id="cb8-4" title="4">                                         <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5">))</a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt;   test     power</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 1    1 0.2366524</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 2    2 0.2210357</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; 3    3 0.2050328</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 4    4 0.1823979</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">power_two_arm</span>(control, active, <span class="at">test=</span><span class="fu">list</span>(<span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>                                         <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="at">weight=</span><span class="st">&quot;n&quot;</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                                         <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                                         <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>))</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt;   test     power</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 1    1 0.2366524</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; 2    2 0.2210357</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; 3    3 0.2050328</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; 4    4 0.1823979</span></span></code></pre></div>
 <p>To calculate sample size required to achieve 80% power:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">size_two_arm</span>(control, active, </a>
-<a class="sourceLine" id="cb9-2" title="2">             <span class="dt">test=</span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</a>
-<a class="sourceLine" id="cb9-3" title="3">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="dt">weight=</span><span class="st">&quot;n&quot;</span>),</a>
-<a class="sourceLine" id="cb9-4" title="4">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>),</a>
-<a class="sourceLine" id="cb9-5" title="5">                       <span class="kw">list</span>(<span class="dt">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="dt">milestone=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb9-6" title="6">             ))</a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt;   test       n0       n1        n       d0       d1        d</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; 1    1 609.7478 609.7478 1219.496 339.3015 292.4822 631.7837</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; 2    2 663.7018 663.7018 1327.404 369.3249 318.3627 687.6876</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; 3    3 729.6092 729.6092 1459.218 405.9998 349.9770 755.9768</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; 4    4 848.3117 848.3117 1696.623 472.0532 406.9159 878.9692</span></a></code></pre></div>
-<p>Note that <code>size_two_arm</code> returns the required sample size <em>n</em> and expected number of events <em>d</em> (per arm and total). When calculating the required sample size per arm, it considers as input the specified ratio between the two arms (e.g. 120:120) while ignoring their individual values (e.g. 120 and 120). Thus, the following two “arm” objects result in the same sample size calculation for the unweighted log-rank test:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">control_new &lt;-<span class="st"> </span>control</a>
-<a class="sourceLine" id="cb10-2" title="2">active_new  &lt;-<span class="st"> </span>active</a>
-<a class="sourceLine" id="cb10-3" title="3">control_new<span class="op">$</span>size  &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-4" title="4">active_new<span class="op">$</span>size   &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="kw">size_two_arm</span>(control_new, active_new)</a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt;  609.7478  609.7478 1219.4956  339.3015  292.4822  631.7837</span></a></code></pre></div>
-<p>Sample size for a trial with 2:1 randomization in favor of the active arm can be calculated like so:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">active_new<span class="op">$</span>size   &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">size_two_arm</span>(control_new, active_new)</a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt;  445.9943  891.9886 1337.9830  248.1789  427.8668  676.0457</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">size_two_arm</span>(control, active, </span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>             <span class="at">test=</span><span class="fu">list</span>(<span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                       <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;weighted logrank&quot;</span>, <span class="at">weight=</span><span class="st">&quot;n&quot;</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                       <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;survival difference&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>                       <span class="fu">list</span>(<span class="at">test=</span><span class="st">&quot;rmst ratio&quot;</span>, <span class="at">milestone=</span><span class="dv">12</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>             ))</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt;   test       n0       n1        n       d0       d1        d</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; 1    1 609.7478 609.7478 1219.496 339.3015 292.4822 631.7837</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; 2    2 663.7018 663.7018 1327.404 369.3249 318.3627 687.6876</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; 3    3 729.6092 729.6092 1459.218 405.9998 349.9770 755.9768</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; 4    4 848.3117 848.3117 1696.623 472.0532 406.9159 878.9692</span></span></code></pre></div>
+<p>Note that <code>size_two_arm</code> returns the required sample size
+<em>n</em> and expected number of events <em>d</em> (per arm and total).
+When calculating the required sample size per arm, it considers as input
+the specified ratio between the two arms (e.g. 120:120) while ignoring
+their individual values (e.g. 120 and 120). Thus, the following two
+“arm” objects result in the same sample size calculation for the
+unweighted log-rank test:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>control_new <span class="ot">&lt;-</span> control</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>active_new  <span class="ot">&lt;-</span> active</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>control_new<span class="sc">$</span>size  <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>active_new<span class="sc">$</span>size   <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">size_two_arm</span>(control_new, active_new)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt;  609.7478  609.7478 1219.4956  339.3015  292.4822  631.7837</span></span></code></pre></div>
+<p>Sample size for a trial with 2:1 randomization in favor of the active
+arm can be calculated like so:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>active_new<span class="sc">$</span>size   <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">size_two_arm</span>(control_new, active_new)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;        n0        n1         n        d0        d1         d </span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt;  445.9943  891.9886 1337.9830  248.1789  427.8668  676.0457</span></span></code></pre></div>
 </div>
 <div id="event-driven-trials" class="section level2">
 <h2>Event-driven trials</h2>
-<p>By containing the keys <code>follow_time</code> and <code>total_time</code>, “arm” objects intrinsically apply to time-driven trials that end when a fixed period of time has elapsed after the last patient in. However, they can also be used to approximate event-driven trials, trials in which the study ends when a desired number of events has been observed. Specifically, a trial requiring <em>d</em> events can be approximated by a trial of length <em>t</em>, where the expected number of events at <em>t</em> is equal to <em>d</em>. The functions <code>exp_events</code> and <code>exp_duration</code> can be useful for this purpose:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">exp_events</span>(control, active) <span class="co"># expected number of events</span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="co">#&gt; [1] 124.3367</span></a>
-<a class="sourceLine" id="cb12-3" title="3">tau &lt;-<span class="st"> </span><span class="kw">exp_duration</span>(control, active, <span class="dt">d=</span><span class="dv">150</span>) <span class="co"># study duration for expected number of events to equal d</span></a>
-<a class="sourceLine" id="cb12-4" title="4"></a>
-<a class="sourceLine" id="cb12-5" title="5">tau</a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; [1] 23.75</span></a></code></pre></div>
-<p>Therefore, under the given assumptions, a trial requiring 150 events can be approximated by a 23.75-month long trial. When updating the trial duration in an “arm” object, it is important to update both the <code>follow_time</code> and <code>total_time</code> to ensure their consistency:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">control_new &lt;-<span class="st"> </span>control</a>
-<a class="sourceLine" id="cb13-2" title="2">control_new<span class="op">$</span>total_time  &lt;-<span class="st"> </span>tau</a>
-<a class="sourceLine" id="cb13-3" title="3">control_new<span class="op">$</span>follow_time &lt;-<span class="st"> </span>tau <span class="op">-</span><span class="st"> </span>control_new<span class="op">$</span>accr_time</a>
-<a class="sourceLine" id="cb13-4" title="4">active_new  &lt;-<span class="st"> </span>active</a>
-<a class="sourceLine" id="cb13-5" title="5">active_new<span class="op">$</span>total_time   &lt;-<span class="st"> </span>tau</a>
-<a class="sourceLine" id="cb13-6" title="6">active_new<span class="op">$</span>follow_time  &lt;-<span class="st"> </span>tau <span class="op">-</span><span class="st"> </span>active_new<span class="op">$</span>accr_time</a>
-<a class="sourceLine" id="cb13-7" title="7"></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="kw">exp_events</span>(control_new, active_new) <span class="co"># check expected number of events</span></a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; [1] 149.975</span></a></code></pre></div>
+<p>By containing the keys <code>follow_time</code> and
+<code>total_time</code>, “arm” objects intrinsically apply to
+time-driven trials that end when a fixed period of time has elapsed
+after the last patient in. However, they can also be used to approximate
+event-driven trials, trials in which the study ends when a desired
+number of events has been observed. Specifically, a trial requiring
+<em>d</em> events can be approximated by a trial of length <em>t</em>,
+where the expected number of events at <em>t</em> is equal to
+<em>d</em>. The functions <code>exp_events</code> and
+<code>exp_duration</code> can be useful for this purpose:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">exp_events</span>(control, active) <span class="co"># expected number of events</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] 124.3367</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>tau <span class="ot">&lt;-</span> <span class="fu">exp_duration</span>(control, active, <span class="at">d=</span><span class="dv">150</span>) <span class="co"># study duration for expected number of events to equal d</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>tau</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; [1] 23.75</span></span></code></pre></div>
+<p>Therefore, under the given assumptions, a trial requiring 150 events
+can be approximated by a 23.75-month long trial. When updating the trial
+duration in an “arm” object, it is important to update both the
+<code>follow_time</code> and <code>total_time</code> to ensure their
+consistency:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>control_new <span class="ot">&lt;-</span> control</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>control_new<span class="sc">$</span>total_time  <span class="ot">&lt;-</span> tau</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>control_new<span class="sc">$</span>follow_time <span class="ot">&lt;-</span> tau <span class="sc">-</span> control_new<span class="sc">$</span>accr_time</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>active_new  <span class="ot">&lt;-</span> active</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>active_new<span class="sc">$</span>total_time   <span class="ot">&lt;-</span> tau</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>active_new<span class="sc">$</span>follow_time  <span class="ot">&lt;-</span> tau <span class="sc">-</span> active_new<span class="sc">$</span>accr_time</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">exp_events</span>(control_new, active_new) <span class="co"># check expected number of events</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; [1] 149.975</span></span></code></pre></div>
 </div>
 <div id="simulating-a-trial" class="section level2">
 <h2>Simulating a trial</h2>
-<p>Finally, time-driven and event-driven trials can be simulated using the following code:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">trial1 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">duration=</span><span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">head</span>(trial1, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co">#&gt;     arm   time.accr  time.obs time.total censor reason</span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="co">#&gt; 81    0 0.137422475 0.9393870   1.076810      1  event</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt; 25    0 1.471682324 0.0696626   1.541345      1  event</span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; 144   1 0.003143816 1.6624453   1.665589      1  event</span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; 107   0 0.454901079 1.2542002   1.709101      1  event</span></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt; 186   1 1.043860969 1.0382043   2.082065      1  event</span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="kw">table</span>(trial1<span class="op">$</span>arm, trial1<span class="op">$</span>reason)</a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt;    </span></a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt;     administration event followup</span></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt;   0             52    63        5</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;   1             62    53        5</span></a>
-<a class="sourceLine" id="cb14-14" title="14"><span class="kw">max</span>(trial1<span class="op">$</span>time.total)</a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; [1] 18</span></a>
-<a class="sourceLine" id="cb14-16" title="16"></a>
-<a class="sourceLine" id="cb14-17" title="17">trial2 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">events=</span><span class="dv">150</span>)</a>
-<a class="sourceLine" id="cb14-18" title="18"><span class="kw">head</span>(trial2, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt;     arm time.accr  time.obs time.total censor reason</span></a>
-<a class="sourceLine" id="cb14-20" title="20"><span class="co">#&gt; 213   1 0.4687554 0.6582531   1.127008      1  event</span></a>
-<a class="sourceLine" id="cb14-21" title="21"><span class="co">#&gt; 40    0 0.4848245 0.6663861   1.151211      1  event</span></a>
-<a class="sourceLine" id="cb14-22" title="22"><span class="co">#&gt; 44    0 0.7151992 0.4879829   1.203182      1  event</span></a>
-<a class="sourceLine" id="cb14-23" title="23"><span class="co">#&gt; 106   0 0.5887742 1.3522716   1.941046      1  event</span></a>
-<a class="sourceLine" id="cb14-24" title="24"><span class="co">#&gt; 9     0 0.7832331 1.3743750   2.157608      1  event</span></a>
-<a class="sourceLine" id="cb14-25" title="25"><span class="kw">sum</span>(trial2<span class="op">$</span>censor)</a>
-<a class="sourceLine" id="cb14-26" title="26"><span class="co">#&gt; [1] 150</span></a></code></pre></div>
-<p>If both <code>duration</code> and <code>events</code> are provided, the study will end whenever one of the criteria is met:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">trial3 &lt;-<span class="st"> </span><span class="kw">simulate_trial</span>(control, active, <span class="dt">duration=</span><span class="dv">18</span>, <span class="dt">events=</span><span class="dv">150</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">max</span>(trial3<span class="op">$</span>time.total)</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt; [1] 18</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="kw">sum</span>(trial3<span class="op">$</span>censor)</a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; [1] 128</span></a></code></pre></div>
-<p>Should it be desired, investigators may also simulate complete data (accrual, survival, censoring) for each individual treatment arm. Note that no cutoff (by number of events or time) is applied. Hence, no patients are administratively censored:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">control_sim &lt;-<span class="st"> </span><span class="kw">simulate_arm</span>(control)</a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">head</span>(control_sim, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt;   arm time.accr  time.obs time.total censor reason time.surv time.loss</span></a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; 1   1 5.3056575 11.756965  17.062622      1  event 11.756965  234.1555</span></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; 2   1 2.4190124 24.820609  27.239621      1  event 24.820609  368.0955</span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; 3   1 2.5310937  5.937343   8.468437      1  event  5.937343  119.1653</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; 4   1 0.5877304  5.025779   5.613509      1  event  5.025779  383.5989</span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt; 5   1 1.0893293 17.136234  18.225563      1  event 17.136234  196.1827</span></a>
-<a class="sourceLine" id="cb16-9" title="9"><span class="kw">table</span>(control_sim<span class="op">$</span>arm, control_sim<span class="op">$</span>reason)</a>
-<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt;    </span></a>
-<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt;     event followup</span></a>
-<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt;   1   108       12</span></a></code></pre></div>
+<p>Finally, time-driven and event-driven trials can be simulated using
+the following code:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>trial1 <span class="ot">&lt;-</span> <span class="fu">simulate_trial</span>(control, active, <span class="at">duration=</span><span class="dv">18</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">head</span>(trial1, <span class="dv">5</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt;     arm time.accr  time.obs time.total censor reason</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; 122   1 1.0114577 0.2993216   1.310779      1  event</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; 110   0 0.0382217 1.5187492   1.556971      1  event</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; 109   0 1.5549119 0.3500164   1.904928      1  event</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; 12    0 0.3402699 1.5805129   1.920783      1  event</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; 39    0 0.1547186 1.9131597   2.067878      1  event</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="fu">table</span>(trial1<span class="sc">$</span>arm, trial1<span class="sc">$</span>reason)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt;    </span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt;     administration event followup</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt;   0             45    71        4</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt;   1             48    69        3</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="fu">max</span>(trial1<span class="sc">$</span>time.total)</span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt; [1] 18</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>trial2 <span class="ot">&lt;-</span> <span class="fu">simulate_trial</span>(control, active, <span class="at">events=</span><span class="dv">150</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="fu">head</span>(trial2, <span class="dv">5</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt;     arm time.accr  time.obs time.total censor   reason</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; 81    0 0.1689503 0.6329578  0.8019081      1    event</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt; 222   1 0.3934911 0.6720223  1.0655134      1    event</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt; 88    0 1.2510261 0.1418356  1.3928617      1    event</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt; 149   1 0.6253446 0.9906663  1.6160108      1    event</span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co">#&gt; 198   1 0.5424634 1.3130129  1.8554763      0 followup</span></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="fu">sum</span>(trial2<span class="sc">$</span>censor)</span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="co">#&gt; [1] 150</span></span></code></pre></div>
+<p>If both <code>duration</code> and <code>events</code> are provided,
+the study will end whenever one of the criteria is met:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>trial3 <span class="ot">&lt;-</span> <span class="fu">simulate_trial</span>(control, active, <span class="at">duration=</span><span class="dv">18</span>, <span class="at">events=</span><span class="dv">150</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">max</span>(trial3<span class="sc">$</span>time.total)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; [1] 18</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">sum</span>(trial3<span class="sc">$</span>censor)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; [1] 105</span></span></code></pre></div>
+<p>Should it be desired, investigators may also simulate complete data
+(accrual, survival, censoring) for each individual treatment arm. Note
+that no cutoff (by number of events or time) is applied. Hence, no
+patients are administratively censored:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>control_sim <span class="ot">&lt;-</span> <span class="fu">simulate_arm</span>(control)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">head</span>(control_sim, <span class="dv">5</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#&gt;   arm time.accr   time.obs time.total censor reason  time.surv time.loss</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt; 1   1  1.396755  0.7678287   2.164583      1  event  0.7678287 385.47039</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; 2   1  1.912468 16.9183206  18.830789      1  event 16.9183206  41.05433</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; 3   1  2.019832 11.7896546  13.809486      1  event 11.7896546  75.81059</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; 4   1  0.100030  4.6107775   4.710807      1  event  4.6107775 642.99622</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; 5   1  3.885474 17.4757370  21.361211      1  event 17.4757370  27.76870</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="fu">table</span>(control_sim<span class="sc">$</span>arm, control_sim<span class="sc">$</span>reason)</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt;    </span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt;     event followup</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt;   1   113        7</span></span></code></pre></div>
 </div>
 
 

@@ -1,20 +1,22 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- message=FALSE, warning=FALSE---------------------------------------
+## ---- message=FALSE, warning=FALSE--------------------------------------------
 library(npsurvSS)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(tibble)
 library(ggplot2)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fun_hr <- function(HR, k, range.min, range.max) {
   (HR-0.3) / (0.9-0.3) * exp(k*(HR-0.3)) / exp(k*(0.9-0.3)) * (range.max-range.min) + range.min
 }
 
-## ---- fig.show='hold'----------------------------------------------------
+## ---- fig.show='hold'---------------------------------------------------------
 HR.vec <- seq(0.3, 0.9, 0.01)
 plot(HR.vec, fun_hr(HR=HR.vec, k=5, range.min=0.6, range.max=0.7),
      xlab="Hazard ratio",
@@ -29,7 +31,7 @@ plot(HR.vec, fun_hr(HR=HR.vec, k=2.3, range.min=12, range.max=48),
      ylab="Accrual duration (months)",
      type="l")
 
-## ---- fig.width=5--------------------------------------------------------
+## ---- fig.width=5-------------------------------------------------------------
 p1.vec <- seq(0.5, 0.7, 0.05)
 optimal <- tibble(
   p1 = rep(p1.vec, each=length(HR.vec)),
@@ -44,7 +46,7 @@ optimal <- tibble(
   events1=0
 )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 R   <- dim(optimal)[1]
 for (r in 1:R) {
   
@@ -89,7 +91,7 @@ for (r in 1:R) {
 
 head(optimal, 5)
 
-## ---- fig.width=4--------------------------------------------------------
+## ---- fig.width=4-------------------------------------------------------------
 group_by(optimal, HR) %>%
   filter(power==max(power)) %>% # identify p1 that maximizes power
   mutate(eprop=events1/d) %>%
@@ -103,7 +105,7 @@ group_by(optimal, HR) %>%
        col="",
        lty="")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 p1.vec <- c(0.5, 3/5, 2/3)
 HR.vec <- seq(0.3, 0.9, 0.05)
 fixed <- tibble(
@@ -119,7 +121,7 @@ fixed <- tibble(
   mu_s = 0  # power, simple randomization
 )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 R   <- dim(fixed)[1]
 for (r in 1:R) {
   
@@ -168,7 +170,7 @@ for (r in 1:R) {
   
 }
 
-## ---- fig.width=6--------------------------------------------------------
+## ---- fig.width=6-------------------------------------------------------------
 gather(fixed, key="approximation", value="power", 7:10) %>%
   ggplot(aes(x=HR, y=power)) +
   geom_line(aes(col=approximation, lty=approximation)) +

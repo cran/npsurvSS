@@ -2,7 +2,7 @@ Package: npsurvSS
 Type: Package
 Title: Sample Size and Power Calculation for Common Non-Parametric
         Tests in Survival Analysis
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: c(person("Godwin", "Yung", email="godwin.y.yung@gmail.com", role=c("aut", "cre")),
   person("Yi", "Liu", email="yiliu4321@gmail.com", role=c("aut")))
 Author: Godwin Yung [aut, cre],
@@ -17,7 +17,7 @@ Description: A number of statistical tests have been proposed to compare two
   analysis. This package provides sample size and power 
   calculation for all of the above statistical tests with allowance for 
   flexible accrual, censoring, and survival (eg. Weibull, piecewise-exponential, 
-  mixture cure). It is the companion R package to the paper by Yung and Liu (2019)
+  mixture cure). It is the companion R package to the paper by Yung and Liu (2020)
   <doi:10.1111/biom.13196>. Specific to the weighted log-rank test, users may 
   specify which approximations they wish to use to estimate the large-sample mean 
   and variance. The default option has been shown to provide substantial
@@ -27,13 +27,12 @@ Depends: R (>= 3.4.0)
 Imports: stats, utils
 License: GPL-2
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.1.1
-Suggests: knitr, rmarkdown, tidyverse, ggplot2
+RoxygenNote: 7.3.1
+Suggests: knitr, rmarkdown, dplyr, tidyr, tibble, ggplot2
 VignetteBuilder: knitr
-URL: http://github.com/godwinyung/npsurvSS
-BugReports: http://github.com/godwinyung/npsurvSS/issues
+URL: https://github.com/godwinyyung/npsurvSS
+BugReports: https://github.com/godwinyyung/npsurvSS/issues
 NeedsCompilation: no
-Packaged: 2019-12-16 00:14:44 UTC; goyung
+Packaged: 2024-05-08 21:34:02 UTC; yungg
 Repository: CRAN
-Date/Publication: 2019-12-18 15:10:03 UTC
+Date/Publication: 2024-05-08 22:00:02 UTC
